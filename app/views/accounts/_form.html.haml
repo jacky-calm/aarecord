@@ -1,9 +1,11 @@
-= simple_form_for(@account) do |f|
-  = f.error_notification
+.row-fluid
+  .span10.offset1
+    = simple_form_for(@account) do |f|
+      = f.error_notification
+      .form-inputs
+        = f.input :restaurant
+        = f.input :total_fee
+        = f.collection_check_boxes :participant_ids, User.all, :id, :name
 
-  .form-inputs
-    = f.input :restaurant
-    = f.input :total_fee
-
-  .form-actions
-    = f.button :submit
+      .form-actions
+        = f.button :submit

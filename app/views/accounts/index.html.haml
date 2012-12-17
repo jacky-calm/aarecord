@@ -20,13 +20,13 @@
     %tr
       %td= account.restaurant
       %td= account.total_fee
-      %td= account.total_fee/account.participants.size
-      %td= account.total_fee%account.participants.size
+      %td= account.avg_fee
+      %td= account.gap_fee
       %td
         - account.participants.each do |p|
           = p.name
-      %td= account.owner.name
-      %td= account.created
+      %td= account.owner.name if account.owner
+      %td= l account.created, :format => "%m/%d/%Y"
       %td= account.modified
       %td= account.cleared
       %td= account.status

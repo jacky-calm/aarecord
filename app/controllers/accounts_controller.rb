@@ -26,6 +26,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new.json
   def new
     @account = Account.new
+    @account.participants = []
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @account }
@@ -61,7 +62,8 @@ class AccountsController < ApplicationController
   # PUT /accounts/1.json
   def update
     @account = Account.find(params[:id])
-
+    @account.owner = current_user
+    @account.modified = DateTime.now
     respond_to do |format|
       if @account.update_attributes(params[:account])
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
