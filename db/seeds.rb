@@ -32,4 +32,7 @@ users << create_user('Hong Hong', 'hjiang@scilearn.com.cn')
 users << create_user('Liu Qin', 'qliu@scilearn.com.cn')
 
 p 'Accounts'
-a = Account.create :restaurant => 'wai po jia', :total_fee => 120, :owner => user, :created => DateTime.now, :modified => DateTime.now, :status => 'New', :participants => users
+a = Account.create :restaurant => 'Wai Po Jia', :total_fee => 120, :owner => users[0], :created => DateTime.now, :modified => DateTime.now, :status => 'New', :participants => users
+p a
+a = Account.create :restaurant => 'Xin Xiang Hui', :total_fee => 120, :owner => users[0], :created => DateTime.now, :modified => DateTime.now, :status => 'New', :participants => users
+p a

@@ -1,10 +1,13 @@
 %h1 Listing accounts
 
-%table
+%table.table-striped
   %tr
     %th Restaurant
     %th Total fee
     %th Avg fee
+    %th Gap fee
+    %th Participants
+    %th Owner
     %th Created
     %th Modified
     %th Cleared
@@ -17,7 +20,12 @@
     %tr
       %td= account.restaurant
       %td= account.total_fee
-      %td= account.avg_fee
+      %td= account.total_fee/account.participants.size
+      %td= account.total_fee%account.participants.size
+      %td
+        - account.participants.each do |p|
+          = p.name
+      %td= account.owner.name
       %td= account.created
       %td= account.modified
       %td= account.cleared

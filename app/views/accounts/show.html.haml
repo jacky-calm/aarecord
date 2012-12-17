@@ -19,6 +19,10 @@
   %b Cleared:
   = @account.cleared
 %p
+  %b Participants:
+  - @account.participants.each do |p|
+    = p.name << ','
+%p
   %b Status:
   = @account.status
 
