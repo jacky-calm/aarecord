@@ -13,9 +13,12 @@ class User
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
 
+  has_and_belongs_to_many :accounts_joined, index: true, inverse_of: :participants, :class_name => "Account"
+  has_many :accounts_owned, inverse_of: :owner, :class_name => "Account"
+
   validates_presence_of :email
   validates_presence_of :encrypted_password
-  
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -48,5 +51,5 @@ class User
   field :name, :type => String
   validates_presence_of :name
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at, :accounts_owned, :accounts_joined
 end
