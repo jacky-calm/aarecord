@@ -21,12 +21,20 @@ class AccountsController < ApplicationController
       format.json { render json: @account }
     end
   end
-
+  def prepare_restaurants
+    @restaurants = []
+    Account.all.each do |a|
+      @restaurants << a.restaurant
+    end
+    @restaurants.uniq!
+  end
   # GET /accounts/new
   # GET /accounts/new.json
   def new
     @account = Account.new
     @account.participants = []
+    prepare_restaurants
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @account }
@@ -36,6 +44,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1/edit
   def edit
     @account = Account.find(params[:id])
+    prepare_restaurants
   end
 
   # POST /accounts

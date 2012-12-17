@@ -4,6 +4,7 @@
       = f.error_notification
       .form-inputs
         = f.input :restaurant
+        = @restaurants.join(', ')
         = f.input :total_fee
         = f.collection_check_boxes :participant_ids, User.all, :id, :name
 
