@@ -4,11 +4,11 @@
       = f.error_notification
   .row-fluid
     .span4
-      = f.input :restaurant, :label=>"Restaurant: "
-      -#%label= "Choose from most used: "
+      = f.input :restaurant, :label=>"Restaurant: ", :html=>{:id=>"restaurant"}
     .span4
       - @restaurants.each do |r|
-        = link_to r, "#", :method=>"get", :class=>"btn btn-link"
+        %span{:class=>"btn btn-link restaurant"}
+          = r
   .row-fluid
     .span10
       = f.input :total_fee, :label=>"Total Fee: "
