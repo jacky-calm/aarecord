@@ -1,12 +1,15 @@
 %h1 Listing bills
 
-%table
+%table.table
   %tr
     %th Type
     %th Fee
+    %th Account
+    %th Debtee
+    %th Debtor
     %th Cleared
     %th Status
-    %th
+    %th Clear
     %th
     %th
 
@@ -14,6 +17,9 @@
     %tr
       %td= bill.type
       %td= bill.fee
+      %td= link_to bill.account.restaurant, account_path(bill.account)
+      %td= bill.debtee.name
+      %td= bill.debtor.name
       %td= bill.cleared
       %td= bill.status
       %td= link_to 'Show', bill
