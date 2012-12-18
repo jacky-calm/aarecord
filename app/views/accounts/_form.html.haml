@@ -1,12 +1,22 @@
-.row-fluid
-  .span10.offset1
-    = simple_form_for(@account) do |f|
+= simple_form_for(@account, :html => { :class => 'form-horizontal' }) do |f|
+  .row-fluid
+    .span10
       = f.error_notification
-      .form-inputs
-        = f.input :restaurant
-        = @restaurants.join(', ')
-        = f.input :total_fee
-        = f.collection_check_boxes :participant_ids, User.all, :id, :name
-
-      .form-actions
-        = f.button :submit
+  .row-fluid
+    .span4
+      = f.input :restaurant, :label=>"Restaurant: "
+      -#%label= "Choose from most used: "
+    .span4
+      - @restaurants.each do |r|
+        = link_to r, "#", :method=>"get", :class=>"btn btn-link"
+  .row-fluid
+    .span10
+      = f.input :total_fee, :label=>"Total Fee: "
+  .row-fluid
+    .span10
+      %label= "Participant: "
+      = f.collection_check_boxes :participant_ids, User.all, :id, :name
+  .row-fluid
+    .span10
+      = f.button :submit, :class => 'btn-primary'
+      = link_to 'Back', accounts_path, :method=>'get', :class => 'btn btn-warning'

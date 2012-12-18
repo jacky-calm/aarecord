@@ -20,4 +20,8 @@ class Account
     return 0 if participants.empty?
     total_fee - participants.size * avg_fee
   end
+  def cleared_at
+    return "Not yet" unless cleared
+    l cleared :format => "%m%d%Y"
+  end
 end

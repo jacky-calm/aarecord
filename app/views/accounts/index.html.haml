@@ -1,39 +1,35 @@
 %h1 Listing accounts
-
-%table.table-striped
-  %tr
-    %th Restaurant
-    %th Total fee
-    %th Avg fee
-    %th Gap fee
-    %th Participants
-    %th Owner
-    %th Created
-    %th Modified
-    %th Cleared
-    %th Status
-    %th
-    %th
-    %th
-
-  - @accounts.each do |account|
+.row
+  .span10
+    = button_to 'New Account', new_account_path, :method=> "get", :class => 'btn btn-primary'
+%table.table.table-striped
+  %tbody
     %tr
-      %td= account.restaurant
-      %td= account.total_fee
-      %td= account.avg_fee
-      %td= account.gap_fee
-      %td
-        - account.participants.each do |p|
-          = p.name
-      %td= account.owner.name if account.owner
-      %td= l account.created, :format => "%m/%d/%Y"
-      %td= account.modified
-      %td= account.cleared
-      %td= account.status
-      %td= link_to 'Show', account
-      %td= link_to 'Edit', edit_account_path(account)
-      %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Restaurant
+      %th Total fee
+      %th Avg fee
+      %th Gap fee
+      %th Participants
+      %th Owner
+      %th Created
+      %th Modified
+      %th Cleared
+      %th Status
+      %th Destroy
 
-%br
+    - @accounts.each do |account|
+      %tr
+        %td= link_to account.restaurant, account
+        %td= account.total_fee
+        %td= account.avg_fee
+        %td= account.gap_fee
+        %td
+          - account.participants.each do |p|
+            = p.name
+        %td= account.owner.name if account.owner
+        %td= l account.created, :format => "%m/%d/%Y"
+        %td= l account.modified, :format => "%m/%d/%Y"
+        %td= account.cleared_at
+        %td= account.status
+        %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-warning'
 
-= link_to 'New Account', new_account_path
