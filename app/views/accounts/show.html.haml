@@ -1,31 +1,33 @@
 %p#notice= notice
 
-%p
-  %b Restaurant:
-  = @account.restaurant
-%p
-  %b Total fee:
-  = @account.total_fee
-%p
-  %b Avg fee:
-  = @account.avg_fee
-%p
-  %b Created:
-  = @account.created
-%p
-  %b Modified:
-  = @account.modified
-%p
-  %b Cleared:
-  = @account.cleared
-%p
-  %b Participants:
+.row
+  .span2
+    %b Restaurant:
+  .span8= @account.restaurant
+.row
+  %b.span2 Total fee:
+  .span8= @account.total_fee
+.row
+  %b.span2 Avg fee:
+  .span8= @account.avg_fee
+.row
+  %b.span2 Created:
+  .span8= @account.created
+.row
+  %b.span2 Modified:
+  .span8= @account.modified
+.row
+  %b.span2 Cleared:
+  .span8= @account.cleared
+.row
+  %b.span2 Participants:
   - @account.participants.each do |p|
     = p.name << ','
-%p
-  %b Status:
-  = @account.status
+.row
+  %b.span2 Status:
+  .span8= @account.status
 
-= link_to 'Edit', edit_account_path(@account)
-\|
-= link_to 'Back', accounts_path
+.span8
+  = link_to 'Edit', edit_account_path(@account)
+  |
+  = link_to 'Back', accounts_path
