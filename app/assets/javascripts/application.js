@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require noty/jquery.noty
+//= require noty/layouts/top.js
+//= require noty/themes/default
 //= require bootstrap
 //= require_tree .

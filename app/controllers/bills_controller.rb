@@ -69,6 +69,23 @@ class BillsController < ApplicationController
     end
   end
 
+  # POST
+  # /bills/1/pay
+  def pay
+    @bill = Bill.find(params[:id])
+    respond_to do |format|
+      if @bill.update_attributes(params[:bill])
+        format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
+        format.json { head :no_content }
+        format.js{render :json => {:result => "success"}, :layout => false, notice: 'Paid' }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @bill.errors, status: :unprocessable_entity }
+        format.js{render :json => {:result => "fail"}, :layout => false }
+      end
+    end
+
+  end
   # DELETE /bills/1
   # DELETE /bills/1.json
   def destroy

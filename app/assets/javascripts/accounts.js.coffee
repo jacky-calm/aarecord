@@ -7,4 +7,12 @@ $(document).ready( ->
   $(".restaurant").click((event)->
     $("#account_restaurant").val($(this).text().trim())
   )
+  $('.bill').click(() ->
+    $.post($(this).attr('href')+".js", null, (data)->
+      #noty({text: "Mark as paid successfully!", layout: "top"}) if (data.result == "success")
+      alert("Post")
+      $("#flash-message").val("Mark as paid successfully!").removeClass("hidden").alert()  if (data.result == "success")
+    , "json")
+    return false
+  )
 )

@@ -3,3 +3,7 @@
     %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
       %a.close{"data-dismiss" => "alert"} ×
       = content_tag :div, msg, :id => "flash_#{name}"
+
+#flash-message.alert.hidden
+  %button{"data-dismiss"=>"alert", :class=>"close"} x
+  Alert message

@@ -1,5 +1,7 @@
 Aarecord::Application.routes.draw do
-  resources :bills
+  resources :bills do
+    post 'pay', :on => :member
+  end
 
 
   resources :accounts
