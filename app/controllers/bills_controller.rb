@@ -73,6 +73,7 @@ class BillsController < ApplicationController
   # /bills/1/pay
   def pay
     @bill = Bill.find(params[:id])
+    @bill.update_attributes(:status=>'Paid')
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
         format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }

@@ -13,7 +13,6 @@
       %th Owner
       %th Created
       %th Modified
-      %th Cleared
       %th Status
       %th Destroy
 
@@ -29,9 +28,8 @@
             = link_to b.debtor.name, pay_bill_path(b), :class=>"btn btn-link bill"
 
         %td= account.owner.name if account.owner
-        %td= l account.created, :format => "%m/%d/%Y"
-        %td= l account.modified, :format => "%m/%d/%Y"
-        %td= account.cleared_at
+        %td= l account.created_at, :format => "%m/%d/%Y"
+        %td= l account.updated_at, :format => "%m/%d/%Y"
         %td= account.status
         %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-warning', :class => 'btn btn-warning'
 

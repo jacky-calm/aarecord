@@ -1,16 +1,18 @@
 class Account
   include Mongoid::Document
+  include Mongoid::Timestamps
+
+  STATUS_NEW, STATUS_CLEARED = 'New', 'Cleared'
+
   field :restaurant, type: String
   field :total_fee, type: Float
-  field :created, type: Time
-  field :modified, type: Time
-  field :cleared, type: Time
-  field :status, type: String
+  field :status, type: String, :default=>STATUS_NEW
 
   belongs_to :owner, :class_name => "User", inverse_of: :accounts_owned
   has_many :bills, dependent: :delete
   has_and_belongs_to_many :participants, :class_name => "User", inverse_of: :accounts_joined
-  attr_accessible :restaurant, :total_fee, :status, :owner, :participants, :created, :modified, :cleared, :participant_ids
+
+  attr_accessible :restaurant, :total_fee, :status, :owner, :participants, :participant_ids, :created_at, :updated_at
 
   after_save :createBills
 
@@ -31,7 +33,7 @@ class Account
     total_fee - participants.size * avg_fee
   end
   def cleared_at
-    return "Not yet" unless cleared
-    l cleared :format => "%m%d%Y"
+    return "Not yet" unless status=='Cleared'
+    l updated_at :format => "%m%d%Y"
   end
 end

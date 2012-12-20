@@ -52,9 +52,6 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     @account.owner = current_user
-    @account.created = DateTime.now
-    @account.modified = DateTime.now
-    @account.status = 'New'
 
     respond_to do |format|
       if @account.save
@@ -72,7 +69,6 @@ class AccountsController < ApplicationController
   def update
     @account = Account.find(params[:id])
     @account.owner = current_user
-    @account.modified = DateTime.now
     respond_to do |format|
       if @account.update_attributes(params[:account])
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }

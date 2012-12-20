@@ -12,13 +12,10 @@
   .span8= @account.avg_fee
 .row
   %b.span2 Created:
-  .span8= @account.created
+  .span8= @account.created_at
 .row
   %b.span2 Modified:
-  .span8= @account.modified
-.row
-  %b.span2 Cleared:
-  .span8= @account.cleared
+  .span8= @account.updated_at
 .row
   %b.span2 Participants:
   - @account.participants.each do |p|
