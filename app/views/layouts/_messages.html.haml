@@ -4,6 +4,6 @@
       %a.close{"data-dismiss" => "alert"} ×
       = content_tag :div, msg, :id => "flash_#{name}"
 
-#flash-message.alert.hidden
-  %button{"data-dismiss"=>"alert", :class=>"close"} x
-  Alert message
+#flash-message
+  -#{:class=>"alert hide", "data-alert" => "alert"}
+  -#%a{"href" => "#", "data-dismiss" => "alert", :class=>"close"} x
