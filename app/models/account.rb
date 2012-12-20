@@ -32,12 +32,19 @@ class Account
     return 0 if participants.empty?
     total_fee - participants.size * avg_fee
   end
+  def clear?
+    status==STATUS_CLEARED
+  end
+
   def try_to_clear
-    return false if bills.one? {|b| !b.paid?}
+    return false if bills.one? do |b|
+      logger.info  !b.paid?
+      !b.paid?
+    end
     self.update_attributes :status=>STATUS_CLEARED
   end
   def cleared_at
-    return "Not yet" unless status=='Cleared'
+    return "Not yet" unless clear?
     l updated_at :format => "%m%d%Y"
   end
 end

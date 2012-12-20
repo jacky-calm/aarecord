@@ -15,7 +15,10 @@ $(document).ready( ->
   )
   $('.bill').click(() ->
     $.post($(this).attr('href')+".js", null, (data)->
-      newAlert('success', 'Mark as paid successfully!')
+      if data.result=='clear'
+        newAlert('success', 'Mark as paid successfully! The account is clear!')
+      else
+        newAlert('success', 'Mark as paid successfully!')
     , "json")
     return false
   )

@@ -75,7 +75,11 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
     respond_to do |format|
       if @bill.pay
-        format.js{render :json => {:result => "success"}, :layout => false}
+        if @bill.account.clear?
+          format.js{render :json => {:result => "clear"}, :layout => false}
+        else
+          format.js{render :json => {:result => "paid"}, :layout => false}
+        end
       else
         format.js{render :json => {:result => "fail"}, :layout => false }
       end

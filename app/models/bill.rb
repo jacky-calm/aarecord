@@ -14,16 +14,18 @@ class Bill
   attr_accessible :type, :fee, :account, :status, :debtee, :debtor, :created_at, :updated_at
 
   def pay
+    return true if pard?
     self.update_attributes :status=>STATUS_PAID
     account.try_to_clear
   end
 
   def paid?
+    logger.info status
     status == STATUS_PAID
   end
 
   def cleared_at
-    return "Not yet" unless status==STATUS_PAID
+    return "Not yet" unless paid?
     l updated_at :format => "%m%d%Y"
   end
 end
