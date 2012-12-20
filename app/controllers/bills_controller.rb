@@ -73,15 +73,10 @@ class BillsController < ApplicationController
   # /bills/1/pay
   def pay
     @bill = Bill.find(params[:id])
-    @bill.update_attributes(:status=>'Paid')
     respond_to do |format|
-      if @bill.update_attributes(params[:bill])
-        format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
-        format.json { head :no_content }
-        format.js{render :json => {:result => "success"}, :layout => false, notice: 'Paid' }
+      if @bill.pay
+        format.js{render :json => {:result => "success"}, :layout => false}
       else
-        format.html { render action: "edit" }
-        format.json { render json: @bill.errors, status: :unprocessable_entity }
         format.js{render :json => {:result => "fail"}, :layout => false }
       end
     end

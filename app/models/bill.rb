@@ -15,7 +15,13 @@ class Bill
 
   def pay
     self.update_attributes :status=>STATUS_PAID
+    account.try_to_clear
   end
+
+  def paid?
+    status == STATUS_PAID
+  end
+
   def cleared_at
     return "Not yet" unless status==STATUS_PAID
     l updated_at :format => "%m%d%Y"

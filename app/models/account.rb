@@ -14,7 +14,7 @@ class Account
 
   attr_accessible :restaurant, :total_fee, :status, :owner, :participants, :participant_ids, :created_at, :updated_at
 
-  after_save :createBills
+  after_create :createBills
 
   def createBills
     participants.each do |p|
@@ -31,6 +31,10 @@ class Account
   def gap_fee
     return 0 if participants.empty?
     total_fee - participants.size * avg_fee
+  end
+  def try_to_clear
+    return false if bills.one? {|b| !b.paid?}
+    self.update_attributes :status=>STATUS_CLEARED
   end
   def cleared_at
     return "Not yet" unless status=='Cleared'
