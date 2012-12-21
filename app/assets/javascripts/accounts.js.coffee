@@ -15,11 +15,15 @@ $(document).ready( ->
   )
   $('.bill').click(() ->
     $.post($(this).attr('href')+".js", null, (data)->
+      ap = $('#bill_'+data.bill_id).parent()
+      if ap.find('i')
+        ap.find('i').remove()
+      ap.prepend("<i class='icon-ok green'></i>")
       if data.result=='clear'
-        newAlert('success', 'Mark as paid successfully! The account is clear!')
-        $("#status_"+data.account_id).text("Cleared")
-      else
-        newAlert('success', 'Mark as paid successfully!')
+        #newAlert('success', 'Mark as paid successfully! The account is clear!')
+        $("#status_"+data.account_id).text("Cleared").addClass("text-success")
+      #else
+        #newAlert('success', 'Mark as paid successfully!')
     , "json")
     return false
   )

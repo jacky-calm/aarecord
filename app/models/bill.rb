@@ -19,6 +19,7 @@ class Bill
     self.update_attributes :status=>STATUS_PAID
     logger.info "try to clear the account #{account.restaurant}"
     account.try_to_clear
+    return true
   end
 
   def gap?

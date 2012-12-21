@@ -24,13 +24,18 @@
         %td= account.avg_fee
         %td= account.gap_fee
         %td
-          - account.bills.reject{|b| b.type!='Int' }.each do |b|
-            = link_to b.debtor.name, pay_bill_path(b), :class=>"btn btn-link bill"
+          %ul{:class=>'bill-list'}
+            - account.bills.reject{|b| b.type!='Int' }.each do |b|
+              %li
+                - if b.paid?
+                  %i{:class=>'icon-ok green'}
+                = link_to b.debtor.name, pay_bill_path(b), :class=>"btn btn-link bill", :id=>"bill_#{b.id}"
 
         %td= account.owner.name if account.owner
         %td= l account.created_at, :format => "%m/%d/%Y"
         %td= l account.updated_at, :format => "%m/%d/%Y"
-        %td{:id=>"status_#{account.id}"}
-          = account.status
+        %td
+          %p{:id=>"status_#{account.id}", :class=>"#{'text-success' if account.clear?}"}
+            = account.status
         %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-warning', :class => 'btn btn-warning'
 
