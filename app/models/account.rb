@@ -37,10 +37,9 @@ class Account
   end
 
   def try_to_clear
-    return false if bills.one? do |b|
-      logger.info  !b.paid?
-      !b.paid?
-    end
+    #debugger
+    return false if bills.any? { |b| !b.gap? and !b.paid? }
+    logger.info "clear the account #{self.restaurant}"
     self.update_attributes :status=>STATUS_CLEARED
   end
   def cleared_at

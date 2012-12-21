@@ -3,6 +3,7 @@ class Bill
   include Mongoid::Timestamps
 
   STATUS_NEW, STATUS_PAID = 'New', 'Paid'
+  TYPE_INT, TYPE_GAP = 'Int', 'Gap'
 
   field :type, type: String
   field :fee, type: Float
@@ -14,13 +15,16 @@ class Bill
   attr_accessible :type, :fee, :account, :status, :debtee, :debtor, :created_at, :updated_at
 
   def pay
-    return true if pard?
+    return true if paid?
     self.update_attributes :status=>STATUS_PAID
+    logger.info "try to clear the account #{account.restaurant}"
     account.try_to_clear
   end
 
+  def gap?
+    type == TYPE_GAP
+  end
   def paid?
-    logger.info status
     status == STATUS_PAID
   end
 
