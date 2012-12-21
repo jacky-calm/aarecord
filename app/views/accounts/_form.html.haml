@@ -6,9 +6,10 @@
     .span4
       = f.input :restaurant, :label=>"Restaurant: ", :html=>{:id=>"restaurant"}
     .span4
-      - @restaurants.each do |r|
-        %span{:class=>"btn btn-link restaurant"}
-          = r
+      - if @restaurants
+        - @restaurants.each do |r|
+          %span{:class=>"btn btn-link restaurant"}
+            = r
   .row-fluid
     .span10
       = f.input :total_fee, :label=>"Total Fee: "

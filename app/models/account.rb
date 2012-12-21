@@ -14,6 +14,9 @@ class Account
 
   attr_accessible :restaurant, :total_fee, :status, :owner, :participants, :participant_ids, :created_at, :updated_at
 
+  validates_presence_of :restaurant, :participant_ids
+  validates :total_fee, :presence => true
+
   after_create :createBills
 
   def createBills
