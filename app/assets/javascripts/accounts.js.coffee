@@ -17,6 +17,7 @@ $(document).ready( ->
     $.post($(this).attr('href')+".js", null, (data)->
       if data.result=='clear'
         newAlert('success', 'Mark as paid successfully! The account is clear!')
+        $("#status_"+data.account_id).text("Cleared")
       else
         newAlert('success', 'Mark as paid successfully!')
     , "json")

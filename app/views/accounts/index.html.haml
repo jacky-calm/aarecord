@@ -1,4 +1,4 @@
-%h1 Listing accounts
+%h1 All the accounts
 .row
   .span10
     = button_to 'New Account', new_account_path, :method=> "get", :class => 'btn btn-primary'
@@ -30,6 +30,7 @@
         %td= account.owner.name if account.owner
         %td= l account.created_at, :format => "%m/%d/%Y"
         %td= l account.updated_at, :format => "%m/%d/%Y"
-        %td= account.status
+        %td{:id=>"status_#{account.id}"}
+          = account.status
         %td= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-warning', :class => 'btn btn-warning'
 

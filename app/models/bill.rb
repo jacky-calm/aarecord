@@ -24,6 +24,7 @@ class Bill
   def gap?
     type == TYPE_GAP
   end
+
   def paid?
     status == STATUS_PAID
   end

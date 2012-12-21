@@ -30,3 +30,13 @@ gem "better_errors", ">= 0.2.0", :group => :development
 gem "binding_of_caller", ">= 0.6.8", :group => :development
 
 gem "debugger"
+group :development do
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+end
+
+
