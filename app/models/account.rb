@@ -39,6 +39,10 @@ class Account
     status==STATUS_CLEARED
   end
 
+  def locked?
+    bills.any? {|b| b.paid?}
+  end
+
   def try_to_clear
     #debugger
     return false if bills.any? { |b| !b.gap? and !b.paid? }

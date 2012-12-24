@@ -22,6 +22,8 @@ $(document).ready( ->
       if data.result=='clear'
         #newAlert('success', 'Mark as paid successfully! The account is clear!')
         $("#status_"+data.account_id).text("Cleared").addClass("text-success")
+        if $.find("#destroy_"+data.account_id)
+          $("#destroy_"+data.account_id).remove()
       #else
         #newAlert('success', 'Mark as paid successfully!')
     , "json")
