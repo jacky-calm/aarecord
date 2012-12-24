@@ -4,7 +4,7 @@ Aarecord::Application.routes.draw do
   end
 
 
-  resources :accounts
+  resources :accounts, :except => [:show, :edit]
 
 
   authenticated :user do
