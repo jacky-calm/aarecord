@@ -20,7 +20,7 @@
       %td= link_to bill.account.restaurant, account_path(bill.account)
       %td= bill.debtee.name
       %td= bill.debtor.name
-      %td= bill.cleared_at
+      %td= l bill.updated_at
       %td= bill.status
       %td= link_to 'Show', bill
       %td= link_to 'Edit', edit_bill_path(bill)

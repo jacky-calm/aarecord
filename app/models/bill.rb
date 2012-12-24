@@ -30,8 +30,4 @@ class Bill
     status == STATUS_PAID
   end
 
-  def cleared_at
-    return "Not yet" unless paid?
-    l updated_at :format => "%m%d%Y"
-  end
 end
