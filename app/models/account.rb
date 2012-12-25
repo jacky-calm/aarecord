@@ -21,10 +21,12 @@ class Account
 
   def createBills
     participants.each do |p|
-      Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Int', :fee => avg_fee, :status=>'New'
-      Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Gap', :fee => avg_gap_fee, :status=>'New'
+      status = p==owner ? Bill::STATUS_PAID : Bill::STATUS_NEW
+      Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Int', :fee => avg_fee, :status=>status
+      if gap_fee > 0 && avg_gap_fee > 0
+        Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Gap', :fee => avg_gap_fee, :status=>status
+      end
     end
-
   end
 
   def avg_fee
@@ -44,7 +46,7 @@ class Account
   end
 
   def locked?
-    bills.any? {|b| b.paid?}
+    bills.any? {|b| b.debtor!=owner && b.paid?}
   end
 
   def try_to_clear
