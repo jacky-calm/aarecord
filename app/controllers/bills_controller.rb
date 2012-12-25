@@ -3,7 +3,7 @@ class BillsController < ApplicationController
   # GET /bills.json
   def index
     @bills_int = Bill.where(:type=>Bill::TYPE_INT).or({:debtor=>current_user}, {:debtee=>current_user})
-    @bills_gap_debt = Bill.where(:type=>Bill::TYPE_GAP, :debtor=>current_user).desc(:id)
+    @bills_gap_debt = Bill.where(:type=>Bill::TYPE_GAP, :debtor=>current_user, :fee.gt=>0).desc(:id)
     @bills_gap_debt_hash = {}
     @bills_gap_debt.each do |b|
       (@bills_gap_debt_hash[b.debtee] ||= []) << b

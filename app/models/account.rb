@@ -22,7 +22,7 @@ class Account
   def createBills
     participants.each do |p|
       Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Int', :fee => avg_fee, :status=>'New'
-      Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Gap', :fee => gap_fee, :status=>'New'
+      Bill.create :debtee=>owner, :debtor=>p, :account=>self, :type=>'Gap', :fee => avg_gap_fee, :status=>'New'
     end
 
   end
@@ -34,6 +34,10 @@ class Account
   def gap_fee
     return 0 if participants.empty?
     total_fee - participants.size * avg_fee
+  end
+  def avg_gap_fee
+    gap_fee / participants.size
+
   end
   def clear?
     status==STATUS_CLEARED

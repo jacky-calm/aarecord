@@ -1,15 +1,23 @@
 %h1 Listing my bills
 
 - @bills_gap_debt_hash.each do |debtor, bills|
-  = debtor.name
-  = link_to 'Clear', debtor, :class=>"btn btn-link"
-  %table.table
-    %tr
-      %th Fee
-      %th Restaurant
-      %th Date
-    - bills.each do |bill|
-      %tr
-        %td= bill.fee
-        %td= bill.account.restaurant
-        %td= l bill.created_at
+  .row
+    .span2
+      %b= debtor.name
+    .span2.offset2
+      = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+      = link_to 'Clear', new_account_path, :method=> "get", :class => 'btn btn-link'
+  .row
+    .span6
+      %table{:class=>"table table-bordered"}
+        %thead
+          %tr
+            %th{:width=>"30%"} Fee
+            %th{:width=>"30%"} Restaurant
+            %th Date
+        - bills.each do |bill|
+          %tbody
+            %tr
+              %td= bill.fee
+              %td= bill.account.restaurant
+              %td= l bill.created_at
