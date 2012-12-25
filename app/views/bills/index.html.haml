@@ -1,44 +1,56 @@
-%h3 My debts to get
+%ul{:class=>"nav nav-tabs", "data-tabs"=>"tabs"}
+  %li{:class=>"active"}
+    %a{:href=>"#to_get","data-toggle"=>"tab"} Bills to Get
+  %li
+    %a{:href=>"#to_pay","data-toggle"=>"tab"} Bills to Pay
+  %li
+    %a{:href=>"#cleared_bills","data-toggle"=>"tab"} Cleared Bills
 
-- @bills_get_hash.each do |debtor, bills|
-  .row
-    .span2
-      %b= "Debtor: " << debtor.name
-    .span2.offset2
-      = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
-      = link_to 'Clear', clear_bills_path(:debtor_id=>debtor.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtor.id}"
-  .row
-    .span6
-      = render "bills", :bills=>bills
-%h3 My debts to pay
+.tab-content
+  #to_get{:class=>"tab-pane active"}
+    %h3 My debts to get
+    - @bills_get_hash.each do |debtor, bills|
+      .row
+        .span2
+          %b= "Debtor: " << debtor.name
+        .span2.offset2
+          = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+          = link_to 'Clear', clear_bills_path(:debtor_id=>debtor.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtor.id}"
+      .row
+        .span6
+          = render "bills", :bills=>bills
 
-- @bills_debt_hash.each do |debtee, bills|
-  .row
-    .span2
-      %b= "Debtee: " << debtee.name
-    .span2.offset2
-      = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
-  .row
-    .span6
-      = render "bills", :bills=>bills
+  #to_pay{:class=>"tab-pane"}
+    %h3 My debts to pay
 
-%h3 Cleared Bills
+    - @bills_debt_hash.each do |debtee, bills|
+      .row
+        .span2
+          %b= "Debtee: " << debtee.name
+        .span2.offset2
+          = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+      .row
+        .span6
+          = render "bills", :bills=>bills
 
-%table{:class=>"table table-bordered"}
-  %tr
-    %th Type
-    %th Fee
-    %th Restaurant
-    %th Debtee
-    %th Debtor
-    %th Date
+  #cleared_bills{:class=>"tab-pane"}
+    %h3 Cleared Bills
 
-  - @bills_cleared.each do |bill|
-    %tr
-      %td= bill.type
-      %td= bill.fee
-      %td= bill.account.restaurant
-      %td= bill.debtee.name
-      %td= bill.debtor.name
-      %td= l bill.updated_at
+    %table{:class=>"table table-bordered"}
+      %tr
+        %th Type
+        %th Fee
+        %th Restaurant
+        %th Debtee
+        %th Debtor
+        %th Date
+
+      - @bills_cleared.each do |bill|
+        %tr
+          %td= bill.type
+          %td= bill.fee
+          %td= bill.account.restaurant
+          %td= bill.debtee.name
+          %td= bill.debtor.name
+          %td= l bill.updated_at
 
