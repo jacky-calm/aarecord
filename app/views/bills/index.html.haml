@@ -1,9 +1,9 @@
-%h1 Listing my debts
+%h1 My debts
 
-- @bills_gap_debt_hash.each do |debtee, bills|
+- @bills_debt_hash.each do |debtee, bills|
   .row
     .span2
-      %b= debtee.name
+      %b= "Debtee: " << debtee.name
     .span2.offset2
       = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
       = link_to 'Clear', clear_bills_path(:debtee_id=>debtee.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtee.id}"
@@ -21,3 +21,24 @@
               %td= bill.fee
               %td= bill.account.restaurant
               %td= l bill.created_at
+
+%h1 Cleared Bills
+
+%table.table
+  %tr
+    %th Type
+    %th Fee
+    %th Restaurant
+    %th Debtee
+    %th Debtor
+    %th Date
+
+  - @bills_cleared.each do |bill|
+    %tr
+      %td= bill.type
+      %td= bill.fee
+      %td= bill.account.restaurant
+      %td= bill.debtee.name
+      %td= bill.debtor.name
+      %td= l bill.updated_at
+

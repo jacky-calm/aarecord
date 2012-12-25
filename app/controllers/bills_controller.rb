@@ -2,11 +2,12 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills_int = Bill.where(:type=>Bill::TYPE_INT).or({:debtor=>current_user}, {:debtee=>current_user})
-    @bills_gap_debt = Bill.where(:type=>Bill::TYPE_GAP, :debtor=>current_user, :fee.gt=>0, :status=>Bill::STATUS_NEW).desc(:id)
-    @bills_gap_debt_hash = {}
-    @bills_gap_debt.each do |b|
-      (@bills_gap_debt_hash[b.debtee] ||= []) << b
+    @bills_cleared = Bill.where(:status=>Bill::STATUS_PAID, :fee.gt=>0).or({:debtor=>current_user}, {:debtee=>current_user})
+
+    @bills_debt_hash = {}
+    bills_debt = Bill.where(:debtor=>current_user, :fee.gt=>0, :status=>Bill::STATUS_NEW).desc(:id)
+    bills_debt.each do |b|
+      (@bills_debt_hash[b.debtee] ||= []) << b
     end
 
 
