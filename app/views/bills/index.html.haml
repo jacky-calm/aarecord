@@ -1,31 +1,15 @@
-%h1 Listing bills
+%h1 Listing my bills
 
-%table.table
-  %tr
-    %th Type
-    %th Fee
-    %th Account
-    %th Debtee
-    %th Debtor
-    %th Cleared
-    %th Status
-    %th Clear
-    %th
-    %th
-
-  - @bills.each do |bill|
+- @bills_gap_debt_hash.each do |debtor, bills|
+  = debtor.name
+  = link_to 'Clear', debtor, :class=>"btn btn-link"
+  %table.table
     %tr
-      %td= bill.type
-      %td= bill.fee
-      %td= link_to bill.account.restaurant, account_path(bill.account)
-      %td= bill.debtee.name
-      %td= bill.debtor.name
-      %td= l bill.updated_at
-      %td= bill.status
-      %td= link_to 'Show', bill
-      %td= link_to 'Edit', edit_bill_path(bill)
-      %td= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Bill', new_bill_path
+      %th Fee
+      %th Restaurant
+      %th Date
+    - bills.each do |bill|
+      %tr
+        %td= bill.fee
+        %td= bill.account.restaurant
+        %td= l bill.created_at
