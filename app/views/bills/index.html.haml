@@ -1,12 +1,12 @@
-%h1 Listing my bills
+%h1 Listing my debts
 
-- @bills_gap_debt_hash.each do |debtor, bills|
+- @bills_gap_debt_hash.each do |debtee, bills|
   .row
     .span2
-      %b= debtor.name
+      %b= debtee.name
     .span2.offset2
       = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
-      = link_to 'Clear', new_account_path, :method=> "get", :class => 'btn btn-link'
+      = link_to 'Clear', clear_bills_path(:debtee_id=>debtee.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtee.id}"
   .row
     .span6
       %table{:class=>"table table-bordered"}

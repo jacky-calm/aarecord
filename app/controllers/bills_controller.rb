@@ -3,7 +3,7 @@ class BillsController < ApplicationController
   # GET /bills.json
   def index
     @bills_int = Bill.where(:type=>Bill::TYPE_INT).or({:debtor=>current_user}, {:debtee=>current_user})
-    @bills_gap_debt = Bill.where(:type=>Bill::TYPE_GAP, :debtor=>current_user, :fee.gt=>0).desc(:id)
+    @bills_gap_debt = Bill.where(:type=>Bill::TYPE_GAP, :debtor=>current_user, :fee.gt=>0, :status=>Bill::STATUS_NEW).desc(:id)
     @bills_gap_debt_hash = {}
     @bills_gap_debt.each do |b|
       (@bills_gap_debt_hash[b.debtee] ||= []) << b
@@ -92,6 +92,17 @@ class BillsController < ApplicationController
     end
 
   end
+
+  def clear
+    debtee = User.find(params[:debtee_id])
+    bills = Bill.where(:debtor=>current_user, :debtee=>debtee, :status=>Bill::STATUS_NEW)
+    bills.each {|b| b.update_attributes :status=>Bill::STATUS_PAID }
+    respond_to do |format|
+      format.html { redirect_to bills_path, notice: 'Debt was successfully cleared.' }
+      format.js{render :json => {:result => "success", :debtee_id=>debtee.id.to_s}, :layout => false}
+    end
+  end
+
   # DELETE /bills/1
   # DELETE /bills/1.json
   def destroy

@@ -1,6 +1,7 @@
 Aarecord::Application.routes.draw do
   resources :bills do
     post 'pay', :on => :member
+    post 'clear', :on => :collection
   end
 
 
