@@ -1,4 +1,27 @@
-%h1 My debts
+%h3 My debts to get
+
+- @bills_get_hash.each do |debtor, bills|
+  .row
+    .span2
+      %b= "Debtor: " << debtor.name
+    .span2.offset2
+      = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+      = link_to 'Clear', clear_bills_path(:debtor_id=>debtor.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtor.id}"
+  .row
+    .span6
+      %table{:class=>"table table-bordered"}
+        %thead
+          %tr
+            %th{:width=>"30%"} Fee
+            %th{:width=>"30%"} Restaurant
+            %th Date
+        - bills.each do |bill|
+          %tbody
+            %tr
+              %td= bill.fee
+              %td= bill.account.restaurant
+              %td= l bill.created_at
+%h3 My debts to pay
 
 - @bills_debt_hash.each do |debtee, bills|
   .row
@@ -6,7 +29,6 @@
       %b= "Debtee: " << debtee.name
     .span2.offset2
       = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
-      = link_to 'Clear', clear_bills_path(:debtee_id=>debtee.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtee.id}"
   .row
     .span6
       %table{:class=>"table table-bordered"}
@@ -22,9 +44,9 @@
               %td= bill.account.restaurant
               %td= l bill.created_at
 
-%h1 Cleared Bills
+%h3 Cleared Bills
 
-%table.table
+%table{:class=>"table table-bordered"}
   %tr
     %th Type
     %th Fee

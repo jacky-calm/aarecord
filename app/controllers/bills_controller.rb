@@ -4,6 +4,12 @@ class BillsController < ApplicationController
   def index
     @bills_cleared = Bill.where(:status=>Bill::STATUS_PAID, :fee.gt=>0).or({:debtor=>current_user}, {:debtee=>current_user})
 
+    @bills_get_hash = {}
+    bills_get = Bill.where(:debtee=>current_user, :fee.gt=>0, :status=>Bill::STATUS_NEW).desc(:id)
+    bills_get.each do |b|
+      (@bills_get_hash[b.debtor] ||= []) << b
+    end
+
     @bills_debt_hash = {}
     bills_debt = Bill.where(:debtor=>current_user, :fee.gt=>0, :status=>Bill::STATUS_NEW).desc(:id)
     bills_debt.each do |b|
@@ -34,7 +40,7 @@ class BillsController < ApplicationController
     @bill = Bill.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.erbRecords
       format.json { render json: @bill }
     end
   end
@@ -95,8 +101,8 @@ class BillsController < ApplicationController
   end
 
   def clear
-    debtee = User.find(params[:debtee_id])
-    bills = Bill.where(:debtor=>current_user, :debtee=>debtee, :status=>Bill::STATUS_NEW)
+    debtor = User.find(params[:debtor_id])
+    bills = Bill.where(:debtee=>current_user, :debtor=>debtor, :status=>Bill::STATUS_NEW)
     bills.each {|b| b.update_attributes :status=>Bill::STATUS_PAID }
     respond_to do |format|
       format.html { redirect_to bills_path, notice: 'Debt was successfully cleared.' }
