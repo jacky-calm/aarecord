@@ -1,0 +1,12 @@
+%table{:class=>"table table-bordered"}
+  %thead
+    %tr
+      %th{:width=>"30%"} Fee
+      %th{:width=>"30%"} Restaurant
+      %th Date
+  - bills.each do |bill|
+    %tbody
+      %tr
+        %td= bill.fee
+        %td= bill.account.restaurant
+        %td= l bill.created_at

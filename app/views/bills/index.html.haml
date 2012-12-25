@@ -9,18 +9,7 @@
       = link_to 'Clear', clear_bills_path(:debtor_id=>debtor.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtor.id}"
   .row
     .span6
-      %table{:class=>"table table-bordered"}
-        %thead
-          %tr
-            %th{:width=>"30%"} Fee
-            %th{:width=>"30%"} Restaurant
-            %th Date
-        - bills.each do |bill|
-          %tbody
-            %tr
-              %td= bill.fee
-              %td= bill.account.restaurant
-              %td= l bill.created_at
+      = render "bills", :bills=>bills
 %h3 My debts to pay
 
 - @bills_debt_hash.each do |debtee, bills|
@@ -31,18 +20,7 @@
       = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
   .row
     .span6
-      %table{:class=>"table table-bordered"}
-        %thead
-          %tr
-            %th{:width=>"30%"} Fee
-            %th{:width=>"30%"} Restaurant
-            %th Date
-        - bills.each do |bill|
-          %tbody
-            %tr
-              %td= bill.fee
-              %td= bill.account.restaurant
-              %td= l bill.created_at
+      = render "bills", :bills=>bills
 
 %h3 Cleared Bills
 
