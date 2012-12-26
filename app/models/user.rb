@@ -14,7 +14,9 @@ class User
   field :encrypted_password, :type => String, :default => ""
 
   has_and_belongs_to_many :accounts_joined, index: true, inverse_of: :participants, :class_name => "Account"
+  has_and_belongs_to_many :parties_joined, index: true, inverse_of: :participants, :class_name => "Party"
   has_many :accounts_owned, inverse_of: :owner, :class_name => "Account"
+  has_many :parties_owned, inverse_of: :owner, :class_name => "Party"
 
   validates_presence_of :email
   validates_presence_of :encrypted_password
