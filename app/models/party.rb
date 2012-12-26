@@ -11,5 +11,5 @@ class Party
   has_and_belongs_to_many :participants, :class_name => "User", inverse_of: :parties_joined
   embeds_many :dishes
 
-  attr_accessible :restaurant, :dishes, :owner, :participants, :participant_ids, :created_at, :updated_at
+  attr_accessible :restaurant, :dishes, :owner, :participants, :participant_ids, :created_at, :updated_at, :start_at, :name
 end
