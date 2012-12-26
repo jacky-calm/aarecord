@@ -5,5 +5,8 @@ class Dish
   field :name, type: String
   field :price, type: Float
   field :feature, type: String
-  attr_accessible :name, :price, :feature, :created_at, :updated_at
+
+  belongs_to :restaurant
+  belongs_to :party
+  attr_accessible :name, :price, :feature, :created_at, :updated_at, :restaurant, :party
 end

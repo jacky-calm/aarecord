@@ -2,7 +2,7 @@ class PartiesController < ApplicationController
   # GET /parties
   # GET /parties.json
   def index
-    @parties = Party.all
+    @parties = Party.all.desc(:updated_at)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class PartiesController < ApplicationController
 
     respond_to do |format|
       if @party.save
-        format.html { redirect_to @party, notice: 'Party was successfully created.' }
+        format.html { redirect_to parties_path, notice: 'Party was successfully created.' }
         format.json { render json: @party, status: :created, location: @party }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class PartiesController < ApplicationController
 
     respond_to do |format|
       if @party.update_attributes(params[:party])
-        format.html { redirect_to @party, notice: 'Party was successfully updated.' }
+        format.html { redirect_to parties_path, notice: 'Party was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

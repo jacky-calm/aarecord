@@ -6,6 +6,6 @@ class Restaurant
   field :address, type: String
 
   has_many :parties
-  embeds_many :dishes
-  attr_accessible :name, :dishes, :parties, :created_at, :updated_at
+  has_many :dishes
+  attr_accessible :name, :dishes, :parties, :created_at, :updated_at, :dish_ids, :party_ids
 end

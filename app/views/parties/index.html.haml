@@ -1,13 +1,12 @@
 %h1 Listing parties
 
-%table.table
+%table.table.table-striped
   %tr
     %th Name
     %th Restaurant
     %th Dishes
     %th Participants
     %th Start at
-    %th
     %th
     %th
 
@@ -21,8 +20,7 @@
       %td
         - party.participants.each do |p|
           = p.name
-      %td= l party.start_at
-      %td= link_to 'Show', party
+      %td= party.start_at
       %td= link_to 'Edit', edit_party_path(party)
       %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }
 

@@ -1,12 +1,12 @@
-= simple_form_for(@party) do |f|
-  = f.error_notification
+= semantic_form_for @party do |f|
+  = f.semantic_errors :state
 
-  .form-inputs
+  = f.inputs do
     = f.input :name
     = f.input :restaurant
-    = f.input :dish
-    = f.input :participants
+    = f.input :dishes, :as=>:check_boxes
+    = f.input :participants, :as => :check_boxes
     = f.input :start_at
 
-  .form-actions
-    = f.button :submit
+  = f.actions do
+    = f.action :submit
