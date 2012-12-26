@@ -1,5 +1,7 @@
 require "date"
 class AccountsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /accounts
   # GET /accounts.json
   def index

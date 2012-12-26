@@ -1,4 +1,5 @@
 class BillsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /bills
   # GET /bills.json
   def index
