@@ -1,4 +1,5 @@
 class PartiesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /parties
   # GET /parties.json
   def index
@@ -41,6 +42,7 @@ class PartiesController < ApplicationController
   # POST /parties.json
   def create
     @party = Party.new(params[:party])
+    @party.owner = current_user
 
     respond_to do |format|
       if @party.save
