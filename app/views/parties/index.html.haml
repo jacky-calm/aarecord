@@ -1,5 +1,8 @@
 %h1 Listing parties
-
+.row
+  .span2.offset10
+    = link_to 'New Party', new_party_path, :method=> "get", :class => 'btn btn-success'
+%br
 %table.table.table-striped
   %tr
     %th Name
@@ -26,6 +29,3 @@
       %td= link_to 'Edit', edit_party_path(party)
       %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New Party', new_party_path

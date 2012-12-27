@@ -34,7 +34,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new.json
   def new
     @account = Account.new
-    @account.participants = []
+    @account.participants=[current_user]
     prepare_restaurants
 
     respond_to do |format|

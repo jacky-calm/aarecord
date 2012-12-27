@@ -26,6 +26,7 @@ class PartiesController < ApplicationController
   # GET /parties/new.json
   def new
     @party = Party.new
+    @party.participants=[current_user]
 
     respond_to do |format|
       format.html # new.html.erb
