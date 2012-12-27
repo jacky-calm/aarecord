@@ -50,8 +50,8 @@ end
 
 def accounts
   p 'Accounts'
-  Account.create :restaurant => 'Wai Po Jia', :total_fee => 120, :owner => users[0], :participants => users
-  Account.create :restaurant => 'Xin Xiang Hui', :total_fee => 119, :owner => users[0], :participants => users
+  Account.create :restaurant => 'Wai Po Jia', :total_fee => 120, :owner => users[1], :participants => users
+  Account.create :restaurant => 'Xin Xiang Hui', :total_fee => 119, :owner => users[2], :participants => users
   Account.create :restaurant => 'San Jin Chun Qiu', :total_fee => 116, :owner => users[3], :participants => users
   Account.create :restaurant => 'San Jin Chun Qiu', :total_fee => 129, :owner => users[3], :participants => users
 end

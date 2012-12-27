@@ -41,3 +41,4 @@ group :development do
 end
 
 gem 'formtastic'
+gem 'formtastic-bootstrap'

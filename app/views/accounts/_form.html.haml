@@ -16,7 +16,7 @@
   .row-fluid
     .span10
       %label= "Participant: "
-      = f.collection_check_boxes :participant_ids, User.all, :id, :name
+      = f.collection_check_boxes :participant_ids, User.users, :id, :name
   .row-fluid
     .span10
       = f.button :submit, :class => 'btn-primary'

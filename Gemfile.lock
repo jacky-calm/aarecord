@@ -103,6 +103,9 @@ GEM
       sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    formtastic-bootstrap (2.0.0)
+      formtastic (~> 2.2)
+      formtastic-bootstrap
     gherkin (2.11.5)
       json (>= 1.4.6)
     guard (1.5.4)
@@ -268,6 +271,7 @@ DEPENDENCIES
   figaro (>= 0.5.0)
   font-awesome-sass-rails
   formtastic
+  formtastic-bootstrap
   guard-livereload
   guard-rspec
   haml (>= 3.1.7)

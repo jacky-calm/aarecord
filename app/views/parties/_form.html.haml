@@ -1,12 +1,12 @@
-= semantic_form_for @party do |f|
+= semantic_form_for @party, :html => { :class => 'form-horizontal' } do |f|
   = f.semantic_errors :state
 
   = f.inputs do
     = f.input :name
     = f.input :restaurant
     = f.input :dishes, :as=>:check_boxes
-    = f.input :participants, :as => :check_boxes
+    = f.input :participants, :as => :check_boxes, :collection=>User.users
     = f.input :start_at
 
   = f.actions do
-    = f.action :submit
+    = f.action :submit, :button_html => { :class => "btn btn-primary"}
