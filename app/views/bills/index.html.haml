@@ -14,7 +14,7 @@
         .span2
           %b= "Debtor: " << debtor.name
         .span2.offset2
-          = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+          = "Total: " << show_rmb(bills.map{|b| b.fee }.reduce(:+))
           = link_to 'Clear', clear_bills_path(:debtor_id=>debtor.id), :class=>"btn btn-link", :method=> :post, :id=>"debt_#{debtor.id}"
       .row
         .span6
@@ -28,7 +28,7 @@
         .span2
           %b= "Debtee: " << debtee.name
         .span2.offset2
-          = "Total: " << bills.map{|b| b.fee }.reduce(:+).to_s
+          = "Total: " << show_rmb(bills.map{|b| b.fee }.reduce(:+))
       .row
         .span6
           = render "bills", :bills=>bills
@@ -48,7 +48,7 @@
       - @bills_cleared.each do |bill|
         %tr
           %td= bill.type
-          %td= bill.fee
+          %td= show_rmb bill.fee
           %td= bill.account.restaurant
           %td= bill.debtee.name
           %td= bill.debtor.name

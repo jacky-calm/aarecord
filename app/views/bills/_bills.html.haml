@@ -7,6 +7,6 @@
   - bills.each do |bill|
     %tbody
       %tr
-        %td= bill.fee
+        %td= show_rmb(bill.fee)
         %td= bill.account.restaurant
         %td= l bill.created_at

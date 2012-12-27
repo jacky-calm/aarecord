@@ -21,9 +21,9 @@
       %tr
         %td= account.restaurant
 
-        %td= account.total_fee
-        %td= account.avg_fee
-        %td= account.gap_fee
+        %td= show_rmb account.total_fee
+        %td= show_rmb account.avg_fee
+        %td= show_rmb account.gap_fee
         %td
           %ul{:class=>'bill-list'}
             - account.bills.reject{|b| b.type!='Int' }.each do |b|
