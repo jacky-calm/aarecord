@@ -42,3 +42,4 @@ end
 
 gem 'formtastic'
 gem 'formtastic-bootstrap'
+gem 'voteable_mongo'
