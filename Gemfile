@@ -42,4 +42,5 @@ end
 
 gem 'formtastic'
 gem 'formtastic-bootstrap'
-gem 'voteable_mongo'
+#gem 'voteable_mongo'
+gem 'voteable_mongo', :git => 'https://github.com/dementrock/voteable_mongo.git'
