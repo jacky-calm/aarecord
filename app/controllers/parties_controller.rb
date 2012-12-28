@@ -84,12 +84,4 @@ class PartiesController < ApplicationController
     end
   end
 
-  def vote_dish
-    dish = Dish.find(params[:id])
-    current_user.vote(dish, params[:vote].to_sym) unless current_user.voted?(dish)
-    respond_to do |format|
-      format.js{render :json => {:result => "success", :dish_id=>dish.id.to_s}, :layout => false}
-    end
-
-  end
 end

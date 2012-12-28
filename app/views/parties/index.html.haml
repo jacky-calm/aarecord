@@ -20,12 +20,20 @@
       %td= party.owner.name
       %td= party.restaurant.name
       %td
-        - party.dishes.each do |d|
-          = d.name
-      %td
-        - party.participants.each do |p|
-          = p.name
-      %td= party.start_at
-      %td= link_to 'Edit', edit_party_path(party)
-      %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }
+        %ul{:class=>'dish-list'}
+          - party.dishes.each do |d|
+            %li{:id=>"dish_#{d.id}"}
+              = d.name
+              %i{:class=>'vote icon-thumbs-up btn-link', :action=>vote_dish_path(d, :vote=>"up")}
+              %span{:class=>"up_count"}
+                = d.up_votes_count
+              %i{:class=>'vote icon-thumbs-down btn-link'}
+              %span{:class=>"up_count"}
+                = d.down_votes_count
+        %td
+          - party.participants.each do |p|
+            = p.name
+        %td= party.start_at
+        %td= link_to 'Edit', edit_party_path(party)
+        %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }
 

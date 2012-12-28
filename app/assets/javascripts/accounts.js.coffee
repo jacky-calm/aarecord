@@ -14,6 +14,7 @@ $(document).ready( ->
     $("#account_restaurant").val($(this).text().trim())
   )
   $('.bill').click(() ->
+    alert($(this).attr('href')+".js")
     $.post($(this).attr('href')+".js", null, (data)->
       ap = $('#bill_'+data.bill_id).parent()
       if ap.find('i')

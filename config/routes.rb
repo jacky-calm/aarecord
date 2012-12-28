@@ -1,6 +1,9 @@
 Aarecord::Application.routes.draw do
   resources :parties
 
+  resources :dishes do
+    post 'vote', :on => :member
+  end
 
   resources :restaurants
 
